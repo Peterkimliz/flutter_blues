@@ -4,19 +4,19 @@ version '1.0'
 buildscript {
     repositories {
         google()
-        jcenter()
+        mavenCentral() // Replace jcenter() with mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.1.0'
-        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.15'
+        classpath 'com.android.tools.build:gradle:7.0.0' // Update AGP version
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.9.4' // Update Protobuf plugin
     }
 }
 
 rootProject.allprojects {
     repositories {
         google()
-        jcenter()
+        mavenCentral() // Replace jcenter() with mavenCentral()
     }
 }
 
@@ -24,16 +24,17 @@ apply plugin: 'com.android.library'
 apply plugin: 'com.google.protobuf'
 
 android {
-    namespace 'com.pauldemarco.flutter_blue'
+    namespace 'com.pauldemarco.flutter_blue' // Requires AGP 7.0.0+
     compileSdkVersion 30
 
     defaultConfig {
         minSdkVersion 19
     }
+
     sourceSets {
         main {
             proto {
-                srcDir '../protos'
+                srcDir '../protos' // Ensure this directory exists
             }
         }
     }
@@ -41,7 +42,7 @@ android {
 
 protobuf {
     protoc {
-        artifact = 'com.google.protobuf:protoc:3.11.4'
+        artifact = 'com.google.protobuf:protoc:3.21.12' // Update Protobuf compiler
     }
     generateProtoTasks {
         all().each { task ->
@@ -55,5 +56,5 @@ protobuf {
 }
 
 dependencies {
-    implementation 'com.google.protobuf:protobuf-javalite:3.11.4'
+    implementation 'com.google.protobuf:protobuf-javalite:3.21.12' // Update Protobuf library
 }
